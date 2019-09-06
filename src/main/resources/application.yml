@@ -1,0 +1,24 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /api
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://pos.xvo2o.com:3306/springbootdemo?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: Dashayu
+  jpa:
+    database: MySQL
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  data:
+    elasticsearch:
+      cluster-name: my-application
+      cluster-nodes: 127.0.0.1:9300
+
