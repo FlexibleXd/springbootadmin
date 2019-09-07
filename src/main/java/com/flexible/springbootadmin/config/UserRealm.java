@@ -3,6 +3,8 @@ package com.flexible.springbootadmin.config;
 import com.flexible.springbootadmin.entity.SysPermission;
 import com.flexible.springbootadmin.entity.SysRole;
 import com.flexible.springbootadmin.entity.SysUser;
+import com.flexible.springbootadmin.service.SysPermissionService;
+import com.flexible.springbootadmin.service.SysRoleService;
 import com.flexible.springbootadmin.service.SysService;
 import com.flexible.springbootadmin.service.UserService;
 import org.apache.logging.log4j.util.Strings;
@@ -20,17 +22,18 @@ public class UserRealm extends AuthorizingRealm {
     @Resource
     UserService userService;
     @Resource
-    SysService sysService;
-
+    SysRoleService sysRoleService;
+    @Resource
+    SysPermissionService sysPermissionService;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         System.out.println("权限配置-->UserRealm.doGetAuthorizationInfo()");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         SysUser sysUser = (SysUser) principals.getPrimaryPrincipal();
-        for (SysRole role : sysService.getRoleByUser(sysUser.getUser_id())) {
-            authorizationInfo.addRole(role.getRole_name());
-            for (SysPermission p : sysService.getPermissionByRole(role.getRole_id())) {
+        for (SysRole role : sysRoleService.getRoleByUser(sysUser.getUser_id())) {
+            authorizationInfo.addRole(role.getRoleName());
+            for (SysPermission p : sysPermissionService.getPermissionByRole(role.getRoleId())) {
                 authorizationInfo.addStringPermission(p.getPermission_name());
             }
         }

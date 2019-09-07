@@ -102,46 +102,46 @@ public class SysController {
 
 
 
-    @GetMapping("/menu/list")
-    public Object getMenuList() {
-        Map<String, Object> data = new HashMap<>();
-        Result result = new Result();
-        result.setCode(1);
-        result.setMsg("请求成功");
-        List<SysMenuVo> menu = sysService.getMenu();
-        data.put("items", menu);
-        result.setData(data);
-        return result;
-    }
-
-    @PostMapping("/menu")
-    public Object addMenu(@RequestBody SysMenuVo menuVo) {
-        Result result = new Result();
-        result.setCode(1);
-        result.setMsg("请求成功");
-        sysService.addMenu(menuVo);
-        return result;
-    }
-
-    @PutMapping("/menu")
-    public Object updateMenu(@RequestBody SysMenuVo menuVo) {
-        Result result = new Result();
-        result.setCode(1);
-        result.setMsg("请求成功");
-        System.out.println(JSON.toJSONString(menuVo, true));
-        sysService.updateMenu(menuVo);
-        return result;
-    }
-
-    @DeleteMapping("/menu/{menuId}")
-    public Object deleterMenu(@PathVariable ("menuId") Integer menuId) {
-        Result result = new Result();
-        result.setCode(1);
-        result.setMsg("请求成功");
-        System.out.println(JSON.toJSONString(menuId, true));
-        sysService.deleterMenu(menuId);
-        return result;
-    }
+//    @GetMapping("/menu/list")
+//    public Object getMenuList() {
+//        Map<String, Object> data = new HashMap<>();
+//        Result result = new Result();
+//        result.setCode(1);
+//        result.setMsg("请求成功");
+//        List<SysMenuVo> menu = sysService.getMenu();
+//        data.put("items", menu);
+//        result.setData(data);
+//        return result;
+//    }
+//
+//    @PostMapping("/menu")
+//    public Object addMenu(@RequestBody SysMenuVo menuVo) {
+//        Result result = new Result();
+//        result.setCode(1);
+//        result.setMsg("请求成功");
+//        sysService.addMenu(menuVo);
+//        return result;
+//    }
+//
+//    @PutMapping("/menu")
+//    public Object updateMenu(@RequestBody SysMenuVo menuVo) {
+//        Result result = new Result();
+//        result.setCode(1);
+//        result.setMsg("请求成功");
+//        System.out.println(JSON.toJSONString(menuVo, true));
+//        sysService.updateMenu(menuVo);
+//        return result;
+//    }
+//
+//    @DeleteMapping("/menu/{menuId}")
+//    public Object deleterMenu(@PathVariable ("menuId") Integer menuId) {
+//        Result result = new Result();
+//        result.setCode(1);
+//        result.setMsg("请求成功");
+//        System.out.println(JSON.toJSONString(menuId, true));
+//        sysService.deleterMenu(menuId);
+//        return result;
+//    }
 
 //    @GetMapping("/permission")
 //    public Object getPermissionByRole(@PathVariable("roleId") Integer id) {

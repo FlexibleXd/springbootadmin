@@ -1,6 +1,9 @@
 
 package com.flexible.springbootadmin.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -8,13 +11,15 @@ import java.util.List;
 
 @Table(name = "sys_role")
 @Entity
+@Getter
+@Setter
 public class SysRole implements Serializable {
 
     @Id
-    @Column(length = 64)
-    protected String role_id;
-    @Column
-    protected String role_name;
+    @Column(name = "role_id", length = 64)
+    protected String roleId;
+    @Column(name = "role_name")
+    protected String roleName;
     @Column
     private Timestamp create_time;
 
@@ -28,32 +33,6 @@ public class SysRole implements Serializable {
 //    @JoinTable(name = "sys_user_role", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
 //    private List<SysUser> sysUsers;// 一个角色对应多个用户
 
-    public SysRole() {
-    }
-
-    public String getRole_id() {
-        return this.role_id;
-    }
-
-    public void setRole_id(String role_id) {
-        this.role_id = role_id;
-    }
-
-    public String getRole_name() {
-        return this.role_name;
-    }
-
-    public void setRole_name(String role_name) {
-        this.role_name = role_name;
-    }
-
-    public Timestamp getCreate_time() {
-        return this.create_time;
-    }
-
-    public void setCreate_time(Timestamp create_time) {
-        this.create_time = create_time;
-    }
 
 //    public List<SysPermission> getPermissions() {
 //        return permissions;

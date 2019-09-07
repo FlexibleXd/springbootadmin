@@ -27,11 +27,9 @@ public class SysRoleController {
 
     @GetMapping("/role/list")
     public Object getRoleList() {
-        Map<String, Object> data = new HashMap<>();
         Result result = Result.success();
         List<SysRole> role = sysRoleService.getRole();
-        data.put("items", role);
-        result.setData(data);
+        result.setData(role);
         return result;
     }
 }

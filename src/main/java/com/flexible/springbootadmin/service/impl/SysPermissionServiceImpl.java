@@ -1,39 +1,32 @@
 package com.flexible.springbootadmin.service.impl;
 
-import cn.hutool.core.date.DateUtil;
-import com.flexible.springbootadmin.entity.*;
-import com.flexible.springbootadmin.entity.vo.SysMenuVo;
+import com.flexible.springbootadmin.entity.SysPermission;
+import com.flexible.springbootadmin.entity.SysRolePermission;
+import com.flexible.springbootadmin.entity.SysUser;
 import com.flexible.springbootadmin.repository.*;
-import com.flexible.springbootadmin.repository.SysMenuRepository;
+import com.flexible.springbootadmin.service.SysPermissionService;
 import com.flexible.springbootadmin.service.SysService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
-public class SysServiceImpl implements SysService {
-    @Resource
-    private SysUserRoleRepository sysUserRoleRepository;
-
-    @Resource
-    private SysMenuRepository sysMenuRepository;
-
+public class SysPermissionServiceImpl implements SysPermissionService {
     @Resource
     private SysPermissionRepository sysPermissionRepository;
 
     @Resource
     private SysRolePermissionRepository sysRolePermissionRepository;
 
-    @Resource
-    private SysRoleRepository sysRoleRepository;
 
     @Resource
     private SysUserRepository sysUserRepository;
-
 
 
     @Override
@@ -54,7 +47,7 @@ public class SysServiceImpl implements SysService {
             SysPermission sysPermission = new SysPermission();
             sysPermission.setPermission_id(entry.getKey());
             sysPermission.setPermission_name((String) entry.getValue());
-            sysPermission.setCreate_time(new java.util.Date());
+            sysPermission.setCreate_time(new Date());
             permissionList.add(sysPermission);
         }
         sysPermissionRepository.saveAll(permissionList);
@@ -65,12 +58,6 @@ public class SysServiceImpl implements SysService {
     public List<SysPermission> getPermission() {
         return sysPermissionRepository.findAll();
     }
-
-    @Override
-    public Page<SysUser> getUser(Pageable pageable) {
-        return sysUserRepository.findAll(pageable);
-    }
-
 
 
 }

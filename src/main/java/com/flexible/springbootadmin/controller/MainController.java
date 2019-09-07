@@ -29,19 +29,19 @@ public class MainController {
     SysMenuRepository sysMenuRepository;
 
 
-    @GetMapping("/permission")
-    public Object getPermission() {
-        return sysService.getRoleByUser(1);
-    }
+//    @GetMapping("/permission")
+//    public Object getPermission() {
+//        return sysService.getRoleByUser(1);
+//    }
 
 
-    @GetMapping("/add")
-    @RequiresPermissions("user:view")//权限管理;
-    @Desc("用户view")
-    @RequiresAuthentication
-    public Object add() {
-        return sysService.getRoleByUser(1);
-    }
+//    @GetMapping("/add")
+//    @RequiresPermissions("user:view")//权限管理;
+//    @Desc("用户view")
+//    @RequiresAuthentication
+//    public Object add() {
+//        return sysService.getRoleByUser(1);
+//    }
 
 //
 //    @GetMapping("/login")

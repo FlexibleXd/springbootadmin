@@ -21,5 +21,7 @@ public class SysMenuVo implements Serializable {
     private int menuSort;
     private String permissionId;
     private int level;
+    private boolean hidden;
     private Timestamp createTime;
+    private List<SysMenuVo> children;
 }
