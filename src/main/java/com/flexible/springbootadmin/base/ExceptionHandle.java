@@ -29,6 +29,13 @@ public class ExceptionHandle {
         return new Result(401, "Unauthorized", null);
     }
 
+    // 捕捉提示异常
+    @ExceptionHandler(AlertException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Result alertException(HttpServletRequest request, Throwable ex) {
+        return new Result(0, ex.getMessage(), null);
+    }
+
     // 捕捉其他所有异常
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
