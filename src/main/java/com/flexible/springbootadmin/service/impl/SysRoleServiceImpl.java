@@ -6,6 +6,7 @@ import com.flexible.springbootadmin.entity.vo.SysMenuVo;
 import com.flexible.springbootadmin.entity.vo.SysRoleVo;
 import com.flexible.springbootadmin.repository.*;
 import com.flexible.springbootadmin.service.SysRoleService;
+import com.flexible.springbootadmin.util.AppUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,10 +42,15 @@ public class SysRoleServiceImpl implements SysRoleService {
             SysRolePermission sysRolePermission = new SysRolePermission();
             sysRolePermission.setRoleId(sysRoleVo.getRoleId());
             sysRolePermission.setPermissionId(route.getPermissionId());
-            sysRolePermission.setCreate_time(new Timestamp(new Date().getTime()));
+            sysRolePermission.setCreate_time(AppUtils.getNowTime());
             rolePermissionList.add(sysRolePermission);
         }
         addRolePermissionRelation(sysRoleVo.getRoleId(), rolePermissionList);
+        SysRole role = new SysRole();
+        role.setRoleId(sysRoleVo.getRoleId());
+        role.setRoleName(sysRoleVo.getRoleName());
+        role.setCreate_time(new Timestamp(new Date().getTime()));
+        sysRoleRepository.save(role);
     }
 
     /**
