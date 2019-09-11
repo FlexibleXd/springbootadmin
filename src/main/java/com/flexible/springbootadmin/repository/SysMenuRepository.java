@@ -12,5 +12,5 @@ public interface SysMenuRepository extends JpaRepository<SysMenu, Integer> {
 
     List<SysMenu> findByMenuParentOrderByMenuSortAsc(Integer parentId);
 
-
+    SysMenu getByPermissionId(String permissionId);
 }

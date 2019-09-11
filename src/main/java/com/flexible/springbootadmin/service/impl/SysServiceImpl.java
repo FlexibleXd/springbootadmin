@@ -52,7 +52,7 @@ public class SysServiceImpl implements SysService {
         List<SysPermission> permissionList = new ArrayList<>();
         for (Map.Entry<String, Object> entry : permission.entrySet()) {
             SysPermission sysPermission = new SysPermission();
-            sysPermission.setPermission_id(entry.getKey());
+            sysPermission.setPermissionId(entry.getKey());
             sysPermission.setPermission_name((String) entry.getValue());
             sysPermission.setCreate_time(new java.util.Date());
             permissionList.add(sysPermission);

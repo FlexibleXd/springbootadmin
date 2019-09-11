@@ -14,5 +14,4 @@ public class SysRoleVo implements Serializable {
     private String roleId;
     private String roleName;
     private List<SysMenuVo> routes;
-
 }

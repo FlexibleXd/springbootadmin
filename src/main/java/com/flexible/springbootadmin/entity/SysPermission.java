@@ -2,6 +2,8 @@
 package com.flexible.springbootadmin.entity;
 
 
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +13,12 @@ import java.util.Date;
 
 @Entity
 @Table(name = "sys_permission")
+@Getter
+@Setter
 public class SysPermission {
     @Id
-    @Column(length = 64)
-    protected String permission_id;
+    @Column(name = "permission_id", length = 64)
+    protected String permissionId;
     @Column
     protected String permission_name;
     @Column
@@ -23,27 +27,4 @@ public class SysPermission {
     public SysPermission() {
     }
 
-    public String getPermission_id() {
-        return this.permission_id;
-    }
-
-    public void setPermission_id(String permission_id) {
-        this.permission_id = permission_id;
-    }
-
-    public String getPermission_name() {
-        return this.permission_name;
-    }
-
-    public void setPermission_name(String permission_name) {
-        this.permission_name = permission_name;
-    }
-
-    public Date getCreate_time() {
-        return this.create_time;
-    }
-
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
-    }
 }

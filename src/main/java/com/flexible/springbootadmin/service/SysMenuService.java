@@ -9,6 +9,8 @@ public interface SysMenuService {
 
     List<SysMenuVo> getMenuTree();
 
+    List<SysMenuVo> getRoleMenuTree(String roleId);
+
     void addMenu(SysMenuVo menuVo);
 
     void updateMenu(SysMenuVo menuVo);

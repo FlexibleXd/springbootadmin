@@ -33,7 +33,7 @@ public class SysRoleController {
     @GetMapping("/role/list")
     public Object getRoleList() {
         Result result = Result.success();
-        List<SysRole> role = sysRoleService.getRole();
+        List<SysRoleVo> role = sysRoleService.getRole();
         result.setData(role);
         return result;
     }

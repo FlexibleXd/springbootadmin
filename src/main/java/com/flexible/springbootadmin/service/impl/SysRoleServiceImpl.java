@@ -5,6 +5,7 @@ import com.flexible.springbootadmin.entity.*;
 import com.flexible.springbootadmin.entity.vo.SysMenuVo;
 import com.flexible.springbootadmin.entity.vo.SysRoleVo;
 import com.flexible.springbootadmin.repository.*;
+import com.flexible.springbootadmin.service.SysMenuService;
 import com.flexible.springbootadmin.service.SysRoleService;
 import com.flexible.springbootadmin.util.AppUtils;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,21 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Resource
     private SysRolePermissionRepository sysRolePermissionRepository;
 
+    @Resource
+    private SysMenuService sysMenuService;
+
     @Override
-    public List<SysRole> getRole() {
-        return sysRoleRepository.findAll();
+    public List<SysRoleVo> getRole() {
+        List<SysRole> allRoleList = sysRoleRepository.findAll();
+        List<SysRoleVo> roleVoList = new ArrayList<>();
+        for (SysRole sysRole : allRoleList) {
+            SysRoleVo sysRoleVo = new SysRoleVo();
+            sysRoleVo.setRoleId(sysRole.getRoleId());
+            sysRoleVo.setRoleName(sysRole.getRoleName());
+            sysRoleVo.setRoutes(sysMenuService.getRoleMenuTree(sysRole.getRoleId()));
+            roleVoList.add(sysRoleVo);
+        }
+        return roleVoList;
     }
 
     @Override

@@ -45,7 +45,7 @@ public class SysPermissionServiceImpl implements SysPermissionService {
         List<SysPermission> permissionList = new ArrayList<>();
         for (Map.Entry<String, Object> entry : permission.entrySet()) {
             SysPermission sysPermission = new SysPermission();
-            sysPermission.setPermission_id(entry.getKey());
+            sysPermission.setPermissionId(entry.getKey());
             sysPermission.setPermission_name((String) entry.getValue());
             sysPermission.setCreate_time(new Date());
             permissionList.add(sysPermission);

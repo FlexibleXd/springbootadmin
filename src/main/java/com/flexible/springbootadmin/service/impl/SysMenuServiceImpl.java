@@ -33,9 +33,6 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Resource
     private SysRoleRepository sysRoleRepository;
 
-    @Resource
-    private SysUserRepository sysUserRepository;
-
 
     @Override
     public List<SysMenuVo> getMenu() {
@@ -60,6 +57,21 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
+    public List<SysMenuVo> getRoleMenuTree(String roleId) {
+        List<SysMenuVo> returnList = new ArrayList<>();
+        List<SysRolePermission> rolePermissionList = sysRolePermissionRepository.getByRoleId(roleId);
+        for (SysRolePermission sysRolePermission : rolePermissionList) {
+            SysMenu menu = sysMenuRepository.getByPermissionId(sysRolePermission.getPermissionId());
+            SysMenuVo sysMenuVo = new SysMenuVo();
+            sysMenuVo.setMenuName(menu.getMenu_name());
+            sysMenuVo.setMenuUri(menu.getMenu_uri());
+            returnList.add(sysMenuVo);
+        }
+
+        return returnList;
+    }
+
+    @Override
     public void addMenu(SysMenuVo menuVo) {
         SysMenu sysMenu = new SysMenu();
         sysMenu.setCreate_time(new Timestamp(new Date().getTime()));
@@ -68,7 +80,7 @@ public class SysMenuServiceImpl implements SysMenuService {
         sysMenu.setMenu_uri(menuVo.getMenuUri());
         sysMenu.setMenuParent(menuVo.getParentId());
         sysMenu.setMenuSort(menuVo.getMenuSort());
-        sysMenu.setPermission_id(menuVo.getPermissionId());
+        sysMenu.setPermissionId(menuVo.getPermissionId());
         sysMenuRepository.save(sysMenu);
     }
 
@@ -82,7 +94,7 @@ public class SysMenuServiceImpl implements SysMenuService {
         sysMenu.setMenu_uri(menuVo.getMenuUri());
         sysMenu.setMenuParent(menuVo.getParentId());
         sysMenu.setMenuSort(menuVo.getMenuSort());
-        sysMenu.setPermission_id(menuVo.getPermissionId());
+        sysMenu.setPermissionId(menuVo.getPermissionId());
         sysMenuRepository.save(sysMenu);
     }
 
@@ -104,7 +116,7 @@ public class SysMenuServiceImpl implements SysMenuService {
         sysMenuVo.setParentId(parentMenu.getMenuParent());
         sysMenuVo.setMenuDesc(parentMenu.getMenu_desc());
         sysMenuVo.setMenuUri(parentMenu.getMenu_uri());
-        sysMenuVo.setPermissionId(parentMenu.getPermission_id());
+        sysMenuVo.setPermissionId(parentMenu.getPermissionId());
         sysMenuVo.setMenuName(parentMenu.getMenu_name());
         returnList.add(sysMenuVo);
         List<SysMenu> menuList = sysMenuRepository.findByMenuParentOrderByMenuSortAsc(parentMenu.getMenu_id());
@@ -124,7 +136,7 @@ public class SysMenuServiceImpl implements SysMenuService {
         sysMenuVo.setParentId(parentMenu.getMenuParent());
         sysMenuVo.setMenuDesc(parentMenu.getMenu_desc());
         sysMenuVo.setMenuUri(parentMenu.getMenu_uri());
-        sysMenuVo.setPermissionId(parentMenu.getPermission_id());
+        sysMenuVo.setPermissionId(parentMenu.getPermissionId());
         sysMenuVo.setMenuName(parentMenu.getMenu_name());
         List<SysMenu> menuList = sysMenuRepository.findByMenuParentOrderByMenuSortAsc(parentMenu.getMenu_id());
 

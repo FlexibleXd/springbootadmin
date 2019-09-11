@@ -7,7 +7,7 @@ import com.flexible.springbootadmin.entity.vo.SysRoleVo;
 import java.util.List;
 
 public interface SysRoleService {
-    List<SysRole> getRole();
+    List<SysRoleVo> getRole();
 
     void addRole(SysRoleVo sysRoleVo) throws AlertException;
 
