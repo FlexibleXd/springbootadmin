@@ -52,11 +52,7 @@ public class SysRoleServiceImpl implements SysRoleService {
         List<SysMenuVo> routes = sysRoleVo.getRoutes();
         List<SysRolePermission> rolePermissionList = new ArrayList<>();
         for (SysMenuVo route : routes) {
-            SysRolePermission sysRolePermission = new SysRolePermission();
-            sysRolePermission.setRoleId(sysRoleVo.getRoleId());
-            sysRolePermission.setPermissionId(route.getPermissionId());
-            sysRolePermission.setCreate_time(AppUtils.getNowTime());
-            rolePermissionList.add(sysRolePermission);
+            rolePermissionList.addAll(getRolePermissionByMenuVo(route, sysRoleVo.getRoleId()));
         }
         addRolePermissionRelation(sysRoleVo.getRoleId(), rolePermissionList);
         SysRole role = new SysRole();
@@ -100,4 +96,23 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
 
+    public List<SysRolePermission> getRolePermissionByMenuVo(SysMenuVo route, String roleId) {
+        List<SysRolePermission> rolePermissionList = new ArrayList<>();
+        SysRolePermission sysRolePermission = new SysRolePermission();
+        sysRolePermission.setRoleId(roleId);
+        sysRolePermission.setPermissionId(route.getPermissionId());
+        sysRolePermission.setCreate_time(AppUtils.getNowTime());
+        rolePermissionList.add(sysRolePermission);
+        List<SysMenuVo> children = route.getChildren();
+        if (children != null && children.size() != 0) {
+            for (SysMenuVo child : children) {
+                SysRolePermission childRolePermission = new SysRolePermission();
+                childRolePermission.setRoleId(roleId);
+                childRolePermission.setPermissionId(child.getPermissionId());
+                childRolePermission.setCreate_time(AppUtils.getNowTime());
+                rolePermissionList.add(childRolePermission);
+            }
+        }
+        return rolePermissionList;
+    }
 }

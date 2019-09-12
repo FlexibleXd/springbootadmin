@@ -62,12 +62,14 @@ public class SysMenuServiceImpl implements SysMenuService {
         List<SysRolePermission> rolePermissionList = sysRolePermissionRepository.getByRoleId(roleId);
         for (SysRolePermission sysRolePermission : rolePermissionList) {
             SysMenu menu = sysMenuRepository.getByPermissionId(sysRolePermission.getPermissionId());
-            SysMenuVo sysMenuVo = new SysMenuVo();
-            sysMenuVo.setMenuName(menu.getMenu_name());
-            sysMenuVo.setMenuUri(menu.getMenu_uri());
-            returnList.add(sysMenuVo);
+            if (menu != null) {
+                SysMenuVo sysMenuVo = new SysMenuVo();
+                sysMenuVo.setMenuName(menu.getMenu_name());
+                sysMenuVo.setMenuUri(menu.getMenu_uri());
+                sysMenuVo.setPermissionId(menu.getPermissionId());
+                returnList.add(sysMenuVo);
+            }
         }
-
         return returnList;
     }
 
