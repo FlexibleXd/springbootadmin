@@ -31,6 +31,11 @@ public interface SysRoleService {
      */
     @Transactional
     Boolean updateRole(SysRoleVo roleVo) throws AlertException;
-
+    /**
+     * 获取用户权限
+     *
+     * @param userId
+     * @return
+     */
     List<SysRole> getRoleByUser(Integer userId);
 }

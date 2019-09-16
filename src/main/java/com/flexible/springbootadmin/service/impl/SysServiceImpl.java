@@ -3,6 +3,7 @@ package com.flexible.springbootadmin.service.impl;
 import cn.hutool.core.date.DateUtil;
 import com.flexible.springbootadmin.entity.*;
 import com.flexible.springbootadmin.entity.vo.SysMenuVo;
+import com.flexible.springbootadmin.entity.vo.SysUserVo;
 import com.flexible.springbootadmin.repository.*;
 import com.flexible.springbootadmin.repository.SysMenuRepository;
 import com.flexible.springbootadmin.service.SysService;
@@ -16,24 +17,12 @@ import java.util.*;
 
 @Service
 public class SysServiceImpl implements SysService {
-    @Resource
-    private SysUserRoleRepository sysUserRoleRepository;
-
-    @Resource
-    private SysMenuRepository sysMenuRepository;
 
     @Resource
     private SysPermissionRepository sysPermissionRepository;
 
     @Resource
     private SysRolePermissionRepository sysRolePermissionRepository;
-
-    @Resource
-    private SysRoleRepository sysRoleRepository;
-
-    @Resource
-    private SysUserRepository sysUserRepository;
-
 
 
     @Override
@@ -65,12 +54,6 @@ public class SysServiceImpl implements SysService {
     public List<SysPermission> getPermission() {
         return sysPermissionRepository.findAll();
     }
-
-    @Override
-    public Page<SysUser> getUser(Pageable pageable) {
-        return sysUserRepository.findAll(pageable);
-    }
-
 
 
 }

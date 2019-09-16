@@ -12,6 +12,7 @@ import com.flexible.springbootadmin.entity.vo.SysMenuVo;
 import com.flexible.springbootadmin.repository.SysPermissionRepository;
 import com.flexible.springbootadmin.repository.SysUserRepository;
 import com.flexible.springbootadmin.service.SysService;
+import com.flexible.springbootadmin.service.SysUserService;
 import com.flexible.springbootadmin.util.ShiroUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -36,7 +37,8 @@ public class SysController {
 
     @Autowired
     SysService sysService;
-
+    @Autowired
+    SysUserService sysUserService;
     @Autowired
     SysUserRepository sysUserRepository;
 
@@ -81,10 +83,7 @@ public class SysController {
         result.setMsg("请求成功");
 
         Pageable pageable = PageRequest.of(--page, size);
-        Page<SysUser> user = sysService.getUser(pageable);
-        data.put("items", user.getContent());
-        data.put("total", user.getTotalElements());
-        result.setData(data);
+        result.setData(sysUserService.getUser(pageable));
         return result;
     }
 
@@ -99,7 +98,6 @@ public class SysController {
         result.setData(data);
         return result;
     }
-
 
 
 //    @GetMapping("/menu/list")

@@ -8,6 +8,11 @@ import java.util.List;
 
 @Service
 public interface SysMenuService {
+    /**
+     * 获取菜单列表
+     *
+     * @return
+     */
     List<SysMenuVo> getMenu();
 
     /**

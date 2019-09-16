@@ -5,22 +5,19 @@ import com.flexible.springbootadmin.entity.SysRole;
 import com.flexible.springbootadmin.entity.SysUser;
 import com.flexible.springbootadmin.service.SysPermissionService;
 import com.flexible.springbootadmin.service.SysRoleService;
-import com.flexible.springbootadmin.service.SysService;
-import com.flexible.springbootadmin.service.UserService;
-import org.apache.logging.log4j.util.Strings;
+import com.flexible.springbootadmin.service.SysUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.annotation.Resource;
 
 public class UserRealm extends AuthorizingRealm {
     @Resource
-    UserService userService;
+    SysUserService userService;
     @Resource
     SysRoleService sysRoleService;
     @Resource

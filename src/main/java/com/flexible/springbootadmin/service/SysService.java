@@ -19,7 +19,4 @@ public interface SysService {
 
     List<SysPermission> getPermission();
 
-    Page<SysUser> getUser(Pageable pageable);
-
-
 }

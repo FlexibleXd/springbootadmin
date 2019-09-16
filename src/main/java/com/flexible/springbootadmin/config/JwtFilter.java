@@ -3,22 +3,15 @@ package com.flexible.springbootadmin.config;
 import com.alibaba.fastjson.JSON;
 import com.flexible.springbootadmin.base.Result;
 import com.flexible.springbootadmin.entity.SysUser;
-import com.flexible.springbootadmin.repository.SysUserRepository;
-import com.flexible.springbootadmin.service.UserService;
+import com.flexible.springbootadmin.service.SysUserService;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
-import org.hibernate.annotations.Proxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +24,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    UserService userService;
+    SysUserService userService;
 
 //    public JwtFilter() {
 //    }

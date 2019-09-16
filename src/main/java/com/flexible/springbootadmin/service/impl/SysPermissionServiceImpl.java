@@ -25,10 +25,6 @@ public class SysPermissionServiceImpl implements SysPermissionService {
     private SysRolePermissionRepository sysRolePermissionRepository;
 
 
-    @Resource
-    private SysUserRepository sysUserRepository;
-
-
     @Override
     public List<SysPermission> getPermissionByRole(String roleId) {
         List<SysRolePermission> rolePermissionList = sysRolePermissionRepository.getByRoleId(roleId);
