@@ -3,17 +3,34 @@ package com.flexible.springbootadmin.service;
 import com.flexible.springbootadmin.base.AlertException;
 import com.flexible.springbootadmin.entity.SysRole;
 import com.flexible.springbootadmin.entity.vo.SysRoleVo;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public interface SysRoleService {
     List<SysRoleVo> getRole();
 
+    @Transactional
     void addRole(SysRoleVo sysRoleVo) throws AlertException;
 
-    List<SysRole> deleteRole();
+    /**
+     * 删除
+     *
+     * @param roleId
+     * @return
+     */
+    Boolean deleteRole(String roleId) throws AlertException;
 
-    List<SysRole> updateRole();
+    /**
+     * 更新role
+     *
+     * @param roleVo
+     * @return
+     */
+    @Transactional
+    Boolean updateRole(SysRoleVo roleVo) throws AlertException;
 
     List<SysRole> getRoleByUser(Integer userId);
 }

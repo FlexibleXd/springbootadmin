@@ -9,10 +9,7 @@ import com.flexible.springbootadmin.repository.SysPermissionRepository;
 import com.flexible.springbootadmin.service.SysRoleService;
 import com.flexible.springbootadmin.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +40,21 @@ public class SysRoleController {
         System.out.println(JSON.toJSONString(sysRoleVo));
         Result result = Result.success();
         sysRoleService.addRole(sysRoleVo);
+        return result;
+    }
+
+    @PutMapping("/role")
+    public Object updateRole(@RequestBody SysRoleVo sysRoleVo) throws AlertException {
+        System.out.println(JSON.toJSONString(sysRoleVo));
+        Result result = Result.success();
+        sysRoleService.updateRole(sysRoleVo);
+        return result;
+    }
+
+    @DeleteMapping("/role/{roleId}")
+    public Object deleteRole(@PathVariable("roleId") String roleId) throws AlertException {
+        Result result = Result.success();
+        sysRoleService.deleteRole(roleId);
         return result;
     }
 }

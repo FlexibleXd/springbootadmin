@@ -67,6 +67,7 @@ public class SysMenuServiceImpl implements SysMenuService {
                 sysMenuVo.setMenuName(menu.getMenu_name());
                 sysMenuVo.setMenuUri(menu.getMenu_uri());
                 sysMenuVo.setPermissionId(menu.getPermissionId());
+                sysMenuVo.setChildren(new ArrayList<>());
                 returnList.add(sysMenuVo);
             }
         }

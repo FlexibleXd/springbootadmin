@@ -75,13 +75,33 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
-    public List<SysRole> deleteRole() {
-        return null;
+    public Boolean deleteRole(String roleId) throws AlertException {
+        if (sysRoleRepository.countByRoleId(roleId) == 0) {
+            throw new AlertException("角色不存在！");
+        }
+        List<SysRolePermission> rolePermissionList = sysRolePermissionRepository.getByRoleId(roleId);
+        sysRolePermissionRepository.deleteAll(rolePermissionList);
+        sysRoleRepository.deleteById(roleId);
+        return true;
     }
 
     @Override
-    public List<SysRole> updateRole() {
-        return null;
+    public Boolean updateRole(SysRoleVo sysRoleVo) throws AlertException {
+        if (sysRoleRepository.countByRoleId(sysRoleVo.getRoleId()) == 0) {
+            throw new AlertException("角色不存在！");
+        }
+        List<SysMenuVo> routes = sysRoleVo.getRoutes();
+        List<SysRolePermission> rolePermissionList = new ArrayList<>();
+        for (SysMenuVo route : routes) {
+            rolePermissionList.addAll(getRolePermissionByMenuVo(route, sysRoleVo.getRoleId()));
+        }
+        addRolePermissionRelation(sysRoleVo.getRoleId(), rolePermissionList);
+        SysRole role = new SysRole();
+        role.setRoleId(sysRoleVo.getRoleId());
+        role.setRoleName(sysRoleVo.getRoleName());
+        role.setCreate_time(new Timestamp(new Date().getTime()));
+        sysRoleRepository.save(role);
+        return true;
     }
 
     @Override
